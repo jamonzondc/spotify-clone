@@ -14,16 +14,18 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have the 'spotify' title`, () => {
+  it(`should have the 'spotify-clone' title`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('spotify');
+    expect(app.title).toEqual('spotify-clone');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, spotify');
+    expect(compiled.querySelector('h1')?.textContent).toContain(
+      'Hello, spotify-clone'
+    );
   });
 });
