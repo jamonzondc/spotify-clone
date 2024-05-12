@@ -1,0 +1,64 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button shape="round" class="click-scale" (click)="back()">
+        <ion-icon slot="icon-only" name="chevron-back-circle"></ion-icon>
+      </ion-button>
+      <ion-button shape="round" class="click-scale" (click)="forward()">
+        <ion-icon slot="icon-only" name="chevron-forward-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-button shape="round" fill="solid" color="primary">
+        Descubir Premium
+      </ion-button>
+      <ion-button size="small" shape="round" fill="outline">
+        <ion-icon slot="start" name="arrow-down-circle-outline"></ion-icon>
+        Instalar app
+      </ion-button>
+
+      <ion-button shape="round" size="large">
+        <ion-icon slot="icon-only" name="notifications-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-list slot="end">
+      <ion-item id="context-menu-trigger">
+        <ion-avatar aria-hidden="true">
+          <img
+            alt=""
+            src="https://ionicframework.com/docs/img/demos/avatar.svg"
+          />
+        </ion-avatar>
+
+        <ion-popover
+          trigger="context-menu-trigger"
+          triggerAction="click"
+          side="bottom"
+          alignment="end"
+        >
+          <ng-template>
+            <ion-content class="ion-padding">
+              <ion-list>
+                <ion-item button>
+                  Cuenta
+                  <ion-icon name="open-outline" slot="end"></ion-icon>
+                </ion-item>
+                <ion-item button>Perfil</ion-item>
+                <ion-item button
+                  >Sube a Premium
+                  <ion-icon name="open-outline" slot="end"></ion-icon>
+                </ion-item>
+                <ion-item lines="full" button>Configuración</ion-item>
+                <ion-item button>Cerrar sesión</ion-item>
+              </ion-list>
+            </ion-content>
+          </ng-template>
+        </ion-popover>
+      </ion-item>
+    </ion-list>
+
+    <ion-title>Spotify Clone</ion-title>
+  </ion-toolbar>
+</ion-header>

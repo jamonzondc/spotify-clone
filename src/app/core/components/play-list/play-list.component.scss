@@ -1,0 +1,33 @@
+ion-avatar {
+  --border-radius: 4px;
+}
+.track-item {
+  position: relative;
+}
+
+.avatar {
+  position: relative;
+}
+
+.play-icon {
+  font-size: 28px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.track-item:hover .play-icon {
+  opacity: 1;
+}
+
+.ellipsis-icon {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.track-item:hover .ellipsis-icon {
+  opacity: 1;
+}

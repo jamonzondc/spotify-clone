@@ -1,0 +1,30 @@
+<ion-grid class="ion-no-margin ion-no-padding">
+  <ion-row
+    class="ion-no-margin ion-no-padding ion-align-items-center ion-justify-content-center"
+  >
+    @for (item of buttons; track $index; let isLast = $last) { @if(isLast){
+    <ion-col size="2" class="ion-no-margin ion-no-padding">
+      <ion-range
+        color="secondary"
+        aria-label="Volume"
+        (ionChange)="onVolumeChange($event)"
+      ></ion-range>
+    </ion-col>
+    }
+    <ion-col size="auto" class="ion-no-margin ion-no-padding">
+      <ion-button
+        fill="clear"
+        shape="round"
+        [disabled]="item.disabled"
+        (click)="item.isActive = !item.isActive; item?.action()"
+      >
+        <ion-icon
+          slot="icon-only"
+          [color]="item.isActive ? 'success' : 'primary'"
+          [name]="item?.iconName"
+        ></ion-icon>
+      </ion-button>
+    </ion-col>
+    }
+  </ion-row>
+</ion-grid>

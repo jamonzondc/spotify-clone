@@ -1,0 +1,46 @@
+<ion-grid class="scrollable-list">
+  <ion-row>
+    <ion-col>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-label>
+              <h1>Albums</h1>
+            </ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          @for (item of albums$ | async; track $index) {
+          <ion-col>
+            <spotify-card-info
+              [data]="item"
+              (play)="onPlayAlbum(item)"
+              (view)="viewAlbum(item)"
+            />
+          </ion-col>
+          }
+        </ion-row>
+      </ion-grid>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-label>
+              <h1>Playlist</h1>
+            </ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          @for (item of playlists$ | async; track $index) {
+          <ion-col>
+            <spotify-card-info [data]="item" (play)="onPlayPlaylist(item)" />
+          </ion-col>
+          }
+        </ion-row>
+      </ion-grid>
+    </ion-col>
+  </ion-row>
+</ion-grid>

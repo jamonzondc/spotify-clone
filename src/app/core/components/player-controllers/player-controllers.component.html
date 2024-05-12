@@ -1,0 +1,74 @@
+<ion-grid class="ion-no-margin ion-no-padding">
+  <ion-row
+    class="ion-no-margin ion-no-padding ion-align-items-center ion-justify-content-center"
+  >
+    <ion-col
+      size="auto"
+      class="ion-no-margin ion-no-padding ion-margin-horizontal"
+    >
+      <ion-button fill="clear" shape="round" class="click-scale">
+        <ion-icon slot="icon-only" name="shuffle"></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col
+      size="auto"
+      class="ion-no-margin ion-no-padding ion-margin-horizontal"
+    >
+      <ion-button
+        fill="clear"
+        shape="round"
+        class="click-scale"
+        (click)="backTrack()"
+      >
+        <ion-icon slot="icon-only" name="play-skip-back"></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col
+      size="auto"
+      class="ion-no-margin ion-no-padding ion-margin-horizontal"
+    >
+      <ion-button
+        fill="clear"
+        shape="round"
+        class="click-scale"
+        (click)="onPlayOrPause(!playing)"
+      >
+        <ion-icon
+          class="play-pause"
+          slot="icon-only"
+          [name]="playOrPauseIcon"
+        ></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col
+      size="auto"
+      class="ion-no-margin ion-no-padding ion-margin-horizontal"
+    >
+      <ion-button
+        fill="clear"
+        shape="round"
+        class="click-scale"
+        (click)="nextTrack()"
+      >
+        <ion-icon slot="icon-only" name="play-skip-forward"></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col
+      size="auto"
+      class="ion-no-margin ion-no-padding ion-margin-horizontal"
+    >
+      <ion-button fill="clear" shape="round" class="click-scale">
+        <ion-icon slot="icon-only" name="repeat"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <!--  <div>
+        <ion-label>{{ dataTimer.currentTime }}</ion-label>
+        <ion-progress-bar [value]="dataTimer.progress"></ion-progress-bar>
+        <ion-label>{{ dataTimer.remainingTime }}</ion-label>
+      </div> -->
+    </ion-col>
+  </ion-row>
+</ion-grid>

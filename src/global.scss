@@ -1,0 +1,84 @@
+@import "@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/display.css";
+
+/* Optional CSS utils that can be commented out */
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+
+/**
+ * Ionic Dark Mode
+ * -----------------------------------------------------
+ * For more info, please see:
+ * https://ionicframework.com/docs/theming/dark-mode
+ */
+@import "@ionic/angular/css/palettes/dark.always.css";
+@import "@ionic/angular/css/palettes/dark.class.css";
+@import "@ionic/angular/css/palettes/dark.system.css";
+
+:root {
+  --ion-color-primary: #ffffff;
+  --ion-color-primary-rgb: 255, 255, 255;
+  --ion-color-primary-contrast: #000000;
+  --ion-color-primary-contrast-rgb: 0, 0, 0;
+  --ion-color-primary-shade: #e0e0e0;
+  --ion-color-primary-tint: #ffffff;
+
+  --ion-color-secondary: #2dd55b;
+  --ion-color-secondary-rgb: 45, 213, 91;
+  --ion-color-secondary-contrast: #000000;
+  --ion-color-secondary-contrast-rgb: 0, 0, 0;
+  --ion-color-secondary-shade: #28bb50;
+  --ion-color-secondary-tint: #42d96b;
+
+  --ion-background-color: black !important;
+  --ion-card-background: #121212 !important;
+  --ion-item-background: #121212 !important;
+  --ion-toolbar-background: #121212 !important;
+}
+
+.artist-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px; /* Ajusta este valor según tus necesidades */
+  display: inline-block;
+}
+
+.click-scale {
+  transition: transform 0.3s ease-in-out;
+}
+
+.click-scale:active {
+  transform: scale(1.1);
+}
+
+.full-height {
+  height: 100%;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Ajusta esto según tus necesidades */
+}
+
+.row-1 {
+  flex-grow: 1;
+  overflow: auto;
+}
+
+.row-2 {
+  flex-shrink: 0;
+}
+.scrollable-list {
+  height: 100% !important; /* Ajusta esto según tus necesidades */
+  overflow-y: auto !important;
+}
