@@ -15,7 +15,7 @@ export class TrackApiService extends TrackApi {
         map((response: any) => new BasicResponse<string>(response.preview_url)),
         catchError(
           (error: any): Observable<BasicResponse<string>> =>
-            of(new BasicResponse<string>(null, error))
+            of(new BasicResponse<string>(undefined, error))
         )
       );
   }

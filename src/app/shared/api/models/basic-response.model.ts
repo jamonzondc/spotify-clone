@@ -2,19 +2,19 @@ import { ErrorResponse } from './error.response.model';
 
 export class BasicResponse<T> {
   constructor(
-    private data: T | null,
-    private error: ErrorResponse | null = null
+    private data: T | undefined,
+    private error: ErrorResponse | undefined = undefined
   ) {}
 
-  public getData(): T | null {
+  public getData(): T | undefined {
     return this.data;
   }
 
-  public getError(): ErrorResponse | null {
+  public getError(): ErrorResponse | undefined {
     return this.error;
   }
 
   public hasError(): boolean {
-    return this.data === null || this.error !== null;
+    return this.data === undefined;
   }
 }

@@ -27,7 +27,7 @@ export class PlaylistApiService extends PlaylistApi {
         }),
         catchError((error: any): Observable<BasicResponse<Playlist[]>> => {
           return of(
-            new BasicResponse<Playlist[]>(null, getErrorResponseAdapter(error))
+            new BasicResponse<Playlist[]>(undefined, getErrorResponseAdapter(error))
           );
         })
       );
@@ -44,7 +44,7 @@ export class PlaylistApiService extends PlaylistApi {
         }),
         catchError((error: any): Observable<BasicResponse<Playlist>> => {
           return of(
-            new BasicResponse<Playlist>(null, getErrorResponseAdapter(error))
+            new BasicResponse<Playlist>(undefined, getErrorResponseAdapter(error))
           );
         })
       );

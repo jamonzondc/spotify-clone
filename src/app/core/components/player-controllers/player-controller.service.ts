@@ -8,13 +8,14 @@ import {
   interval,
   map,
   of,
+  takeUntil,
   takeWhile,
 } from 'rxjs';
 
 export type DataTimer = {
-  progress: string;
-  currentTime: string;
-  remainingTime: string;
+  progress: number;
+  currentTime: number;
+  remainingTime: number;
   isFinished?: boolean;
 };
 @Injectable()
@@ -22,9 +23,20 @@ export class PlayerControllerService {
   private INTERVAL_TIME = 1000;
   private trackDuration: number = 30000; //Priview duration
   private currentTime: number = 0;
+  private stop$ = new Subject<void>();
 
-  public getDataTimer(initialTime: number): Observable<DataTimer> {
+  public stopDataTimer(): void {
+    this.currentTime = 0;
+    this.stop$.next();
+  }
+
+  public pauseDataTimer(): void {
+    this.stop$.next();
+  }
+
+  public startDataTimer(initialTime: number): Observable<DataTimer> {
     this.trackDuration = initialTime;
+
     return concat(
       interval(this.INTERVAL_TIME).pipe(
         takeWhile(
@@ -37,7 +49,7 @@ export class PlayerControllerService {
         })
       ),
       of(this.calcDataTimer(this.currentTime, this.trackDuration, true))
-    );
+    ).pipe(takeUntil(this.stop$));
   }
 
   private calcDataTimer(
@@ -46,14 +58,10 @@ export class PlayerControllerService {
     isFinished?: boolean
   ): DataTimer {
     return {
-      progress: this.transformTime((currentTime * 1000) / trackDuration),
-      currentTime: this.transformTime(currentTime * 1000),
-      remainingTime: this.transformTime(trackDuration - currentTime * 1000),
+      progress: (currentTime * 1000) / trackDuration,
+      currentTime: currentTime * 1000,
+      remainingTime: trackDuration - currentTime * 1000,
       isFinished,
     };
-  }
-
-  private transformTime(time: number): string {
-    return formatDate(time, 'mm:ss', 'en-US');
   }
 }

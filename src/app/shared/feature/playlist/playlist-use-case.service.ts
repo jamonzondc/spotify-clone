@@ -1,12 +1,12 @@
-import { Injectable, inject } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
-import { BasicResponse } from 'src/app/shared/api/models/basic-response.model';
-import { PlaylistApi } from 'src/app/shared/api/playlist/playlist.api';
-import { Playlist } from 'src/app/shared/entities';
-import { SpotifyState, queue, changeCurrentTrackIndex } from '../../store';
-import { PlaylistUseCase } from './playlist-use-case';
+import {inject, Injectable} from '@angular/core';
+import {Store} from '@ngrx/store';
+import {Observable} from 'rxjs';
+import {tap} from 'rxjs/operators';
+import {BasicResponse} from 'src/app/shared/api/models/basic-response.model';
+import {PlaylistApi} from 'src/app/shared/api/playlist/playlist.api';
+import {Playlist} from 'src/app/shared/entities';
+import {changeCurrentTrackIndex, queue, SpotifyState} from '../../../core/store';
+import {PlaylistUseCase} from './playlist-use-case';
 
 @Injectable()
 export class PlaylistUseCaseService extends PlaylistUseCase {
@@ -23,8 +23,8 @@ export class PlaylistUseCaseService extends PlaylistUseCase {
           return;
         }
 
-        this.store.dispatch(changeCurrentTrackIndex({ currentTrackIndex: 0 }));
-        this.store.dispatch(queue({ queue: response.getData()?.tracks! }));
+        this.store.dispatch(changeCurrentTrackIndex({currentTrackIndex: 0}));
+        this.store.dispatch(queue({queue: response.getData()?.tracks!}));
 
         //this.setCurrentTrack();
       })

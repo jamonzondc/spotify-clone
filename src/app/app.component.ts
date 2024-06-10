@@ -26,7 +26,8 @@ import { HeaderComponent } from './core/components/header/header.component';
 import { MainContentComponent } from './core/components/main-content/main-content.component';
 import { MenuComponent } from './core/components/menu/menu.component';
 import { playlistComponent } from './core/components/play-list/play-list.component';
-import { SpotifyState, queueShowedSelector } from './core';
+import { queueShowedSelector, SpotifyState } from './core';
+import { FooterMDComponent } from './core/components/footer-md/footer-md.component';
 
 @Component({
   selector: 'app-root',
@@ -52,6 +53,7 @@ import { SpotifyState, queueShowedSelector } from './core';
     IonRouterOutlet,
     MainContentComponent,
     FooterComponent,
+    FooterMDComponent,
     playlistComponent,
     AsyncPipe,
     MenuComponent,
@@ -59,10 +61,32 @@ import { SpotifyState, queueShowedSelector } from './core';
   ],
 })
 export class AppComponent {
+  backgroundColor: string = '';
   private store: Store<{ spotify: SpotifyState }> = inject(
     Store<{ spotify: SpotifyState }>
   );
   playlistShowed$: Observable<boolean> = this.store.select(queueShowedSelector);
 
-  constructor() {}
+  constructor() {
+    this.backgroundColor = this.getRandomColor();
+  }
+
+  private getRandomColor(): string {
+    const colors: string[] = [
+      '#FF6B6B',
+      '#4ECDC4',
+      '#1A535C',
+      '#6B5B95',
+      '#355C7D',
+      '#2A363B',
+      '#E84A5F',
+      '#2A363B',
+      '#FECEAB',
+      '#FF847C',
+      '#E84A5F',
+      '#2A363B',
+    ];
+    const randomIndex = Math.floor(Math.random() * colors.length);
+    return `linear-gradient(180deg, ${colors[randomIndex]}, transparent)`;
+  }
 }

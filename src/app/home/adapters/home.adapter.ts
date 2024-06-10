@@ -1,39 +1,34 @@
-import { formatDate } from '@angular/common';
-import {
-  Album,
-  CardType,
-  getArtistsAdapter,
-  getImageAdapter,
-  Playlist,
-} from 'src/app/shared';
+import {formatDate} from '@angular/common';
+import {Album, getArtistViewModelAdapter, Playlist,} from 'src/app/shared';
+import {Card, CardType} from "../../shared/view-models/card.type";
 
-export const albumHomeDataAdapter = (albums: Album[] | null): CardType[] => {
+export const albumHomeDataAdapter = (albums: Album[] | undefined): Card[] => {
   if (!albums) return [];
 
-  return albums.map((album: Album): CardType => {
+  return albums.map((album: Album): Card => {
     return {
-      id: album.id,
+      ...album,
       title: album.name,
+      type: CardType.ALBUM,
       subtitle: `${formatDate(
         album.releaseDate,
         'yyyy',
         'en-US'
-      )} • ${getArtistsAdapter(album.artists)}`,
-      image: getImageAdapter(album.images),
+      )} • ${getArtistViewModelAdapter(album.artists)}`
     };
   });
 };
 export const playlistsHomeDataAdapter = (
-  playlists: Playlist[] | null
-): CardType[] => {
+  playlists: Playlist[] | undefined
+): Card[] => {
   if (!playlists) return [];
 
-  return playlists.map((playlist: Playlist): CardType => {
+  return playlists.map((playlist: Playlist): Card => {
     return {
-      id: playlist.id,
+      ...playlist,
       title: playlist.name,
+      type: CardType.PLAYLIST,
       subtitle: playlist.description,
-      image: playlist.images,
     };
   });
 };

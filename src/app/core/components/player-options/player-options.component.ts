@@ -1,5 +1,5 @@
-import { NgFor } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
+import {NgFor} from '@angular/common';
+import {Component, inject, OnInit} from '@angular/core';
 import {
   IonButton,
   IonCol,
@@ -12,8 +12,8 @@ import {
   IonRow,
   RangeCustomEvent,
 } from '@ionic/angular/standalone';
-import { Store } from '@ngrx/store';
-import { addIcons } from 'ionicons';
+import {Store} from '@ngrx/store';
+import {addIcons} from 'ionicons';
 import {
   desktopOutline,
   expandOutline,
@@ -25,11 +25,8 @@ import {
   volumeMediumOutline,
   volumeMuteOutline,
 } from 'ionicons/icons';
-import {
-  SpotifyState,
-  switchQueueVisibility,
-  volumeChange,
-} from '../../../shared/store';
+import {SpotifyState, switchQueueVisibility, volumeChange,} from '../../store';
+
 type ButtonView = {
   iconName: string;
   disabled?: boolean;
@@ -105,24 +102,35 @@ export class PlayerOptionsComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   pinFormatter(value: number) {
     return `${value}%`;
   }
 
-  public onInformationClick(): void {}
+  public onInformationClick(): void {
+  }
+
   public onMicClick(): void {
     console.log(this.buttons);
   }
+
   public onListClick(): void {
     this.store.dispatch(switchQueueVisibility());
   }
-  public onDesktopClick(): void {}
-  public onVolumeMuteClick(): void {}
+
+  public onDesktopClick(): void {
+  }
+
+  public onVolumeMuteClick(): void {
+  }
+
   public onVolumeChange(event: RangeCustomEvent): void {
     const volume: number = (Number(event.detail.value) || 0) / 100;
-    this.store.dispatch(volumeChange({ volume }));
+    this.store.dispatch(volumeChange({volume}));
   }
-  public onExpandClick(): void {}
+
+  public onExpandClick(): void {
+  }
 }

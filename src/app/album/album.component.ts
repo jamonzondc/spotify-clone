@@ -1,5 +1,5 @@
-import { AsyncPipe, DatePipe, NgFor, NgIf } from '@angular/common';
-import { Component, Input, OnInit, inject } from '@angular/core';
+import {AsyncPipe, DatePipe, NgFor, NgIf} from '@angular/common';
+import {ChangeDetectionStrategy, Component, inject, Input, OnInit} from '@angular/core';
 import {
   IonButton,
   IonCard,
@@ -13,28 +13,25 @@ import {
   IonGrid,
   IonIcon,
   IonImg,
-  IonLabel,
-  IonRow,
-  IonList,
-  IonListHeader,
   IonItem,
   IonItemDivider,
   IonItemOptions,
+  IonLabel,
+  IonList,
+  IonListHeader,
+  IonRow,
 } from '@ionic/angular/standalone';
-import { Store } from '@ngrx/store';
-import { addIcons } from 'ionicons';
-import {
-  addCircleOutline,
-  ellipsisHorizontal,
-  listOutline,
-  play,
-  timeOutline,
-} from 'ionicons/icons';
-import { AlbumUseCaseService, SpotifyState } from 'src/app/core';
-import { AlbumUseCase } from 'src/app/album/services/album-use-case';
-import { Observable } from 'rxjs';
-import { Album, Navigation } from '../shared';
-import { AlbumViewData } from './models/album.type';
+import {addIcons} from 'ionicons';
+import {addCircleOutline, ellipsisHorizontal, listOutline, play, timeOutline,} from 'ionicons/icons';
+import {AlbumUseCaseService} from 'src/app/core';
+import {AlbumUseCase} from 'src/app/album/services/album-use-case';
+import {Observable} from 'rxjs';
+import {Album, AlbumApi, AlbumApiService, Image, Navigation} from '../shared';
+import {ArtistInfoComponent} from "../shared/components/artist-info/artist-info.component";
+import {ImagePipe} from "../shared/pipe/image/image.pipe";
+import {AlbumBannerComponent} from "./components/album-banner/album-banner.component";
+import {AlbumActionsComponent} from "./components/album-actions/album-actions.component";
+import {AlbumTracksComponent} from "./components/album-tracks/album-tracks.component";
 
 @Component({
   selector: 'spotify-album',
@@ -64,17 +61,24 @@ import { AlbumViewData } from './models/album.type';
     IonButton,
     NgIf,
     AsyncPipe,
+    ArtistInfoComponent,
+    ImagePipe,
+    AlbumBannerComponent,
+    AlbumActionsComponent,
+    AlbumTracksComponent
   ],
   templateUrl: './album.component.html',
-  styleUrl: './album.component.scss',
-  providers: [{ provide: AlbumUseCase, useClass: AlbumUseCaseService }],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    {provide: AlbumApi, useClass: AlbumApiService},
+    {provide: AlbumUseCase, useClass: AlbumUseCaseService},
+  ],
 })
 export class AlbumComponent implements OnInit {
   @Input('id') public albumId: string = '';
-  private store: Store<SpotifyState> = inject(Store<SpotifyState>);
   private navigation: Navigation = inject(Navigation);
   private albumUseCase: AlbumUseCase = inject(AlbumUseCase);
-  public album$!: Observable<AlbumViewData | null>;
+  public album$!: Observable<Album | undefined>;
   public backgroundColor: string = '';
 
   ngOnInit(): void {
@@ -89,33 +93,25 @@ export class AlbumComponent implements OnInit {
     this.backgroundColor = this.getRandomColor();
   }
 
-  public onPlayAlbum(albumId: string, image: string): void {
+  public playAlbum(albumId: string, images: Image[]): void {
     if (!albumId) return;
-    this.albumUseCase.playAlbum(albumId, image).subscribe();
+    this.albumUseCase.playAlbum(albumId, images).subscribe();
   }
 
   public playTrackInAlbum(
     albumId: string,
-    image: string,
+    images: Image[],
     currentTrackIndex: number
   ): void {
     if (!albumId) return;
     this.albumUseCase
-      .playTrackInAlbum(albumId, image, currentTrackIndex)
+      .playTrackInAlbum(albumId, images, currentTrackIndex)
       .subscribe();
   }
 
-  public goToArtist(artistId: string): void {
-    if (!artistId) return;
-    this.navigation.navigateTo(`/artist/${artistId}`);
-  }
-
   private getRandomColor(): string {
-    const letters = '0123456789ABCDEF';
-    let color = '#';
-    for (let i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-    }
-    return `linear-gradient(180deg, ${color}, transparent)`;
+    const colors: string[] = ['#FFD1DC', '#D1FFD1', '#D1D1FF', '#FFD1D1', '#FFFFD1', '#D1FFFF', '#FFD1FF', '#D1FFFE', '#FFD1C1', '#D1FFC1', '#C1D1FF', '#FFC1D1'];
+    const randomIndex = Math.floor(Math.random() * colors.length);
+    return `linear-gradient(180deg, ${colors[randomIndex]}, transparent)`
   }
 }

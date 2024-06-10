@@ -21,7 +21,7 @@
 
     <ion-item button *ngIf="currentTrack$ | async as currentTrack">
       <ion-avatar aria-hidden="true" slot="start">
-        <img alt="" [src]="currentTrack?.image" />
+        <img alt="" [src]="currentTrack?.images | image" />
       </ion-avatar>
       <ion-label color="secondary" class="ion-text-nowrap">
         <h3>
@@ -49,7 +49,7 @@
 
     <ion-item button class="track-item">
       <ion-avatar aria-hidden="true" slot="start" class="avatar">
-        <img alt="" [src]="item?.image" />
+        <img alt="" [src]="item?.images | image" />
         <ion-icon name="play" class="play-icon"></ion-icon>
       </ion-avatar>
       <ion-label class="ion-text-nowrap">

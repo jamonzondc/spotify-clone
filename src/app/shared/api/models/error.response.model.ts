@@ -1,7 +1,7 @@
 export class ErrorResponse {
-  constructor(private code: number, private error: string) {}
+  constructor(private code: string, private error: string) {}
 
-  public getCode(): number {
+  public getCode(): string {
     return this.code;
   }
 

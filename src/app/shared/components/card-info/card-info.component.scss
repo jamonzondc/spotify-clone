@@ -1,0 +1,22 @@
+ion-card {
+  width: 170px;
+  height: 260px;
+}
+
+img {
+  max-width: 150px;
+  width: 100%;
+  height: auto;
+}
+
+ion-button {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+ion-card:hover ion-button {
+  opacity: 1;
+}

@@ -1,0 +1,45 @@
+<ion-row>
+  <ion-col class="">
+    <ion-list>
+      <div class="sticky-header">
+        <ion-item-divider>
+          <ion-list-header lines="full">
+            <span class="number"> # </span>
+            <ion-label class="track-info">
+              <h2>Titulo</h2>
+            </ion-label>
+            <ion-icon name="time-outline"></ion-icon>
+          </ion-list-header>
+        </ion-item-divider>
+      </div>
+      <ion-item button class="track-item" *ngFor="let track of album.tracks; let index = index">
+            <span
+              class="avatar"
+              (click)="playTrackInAlbum.emit(index)"
+            >
+              <span class="number">
+                {{ index + 1 }}
+              </span>
+              <ion-icon name="play" class="play-icon"></ion-icon>
+            </span>
+        <ion-label class="track-info">
+          <h2>{{ track.name }}</h2>
+          <app-artist-info [artists]="track.artists"/>
+        </ion-label>
+        <ion-icon
+          class="add-icon"
+          name="add-circle-outline"
+          slot="end"
+        ></ion-icon>
+        <ion-label slot="end">
+          <p>{{ track.duration | date : "m:ss" }}</p>
+        </ion-label>
+        <ion-icon
+          name="ellipsis-horizontal"
+          slot="end"
+          class="ellipsis-icon"
+        ></ion-icon>
+      </ion-item>
+    </ion-list>
+  </ion-col>
+</ion-row>

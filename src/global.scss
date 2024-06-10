@@ -38,18 +38,29 @@
   --ion-color-secondary-shade: #28bb50;
   --ion-color-secondary-tint: #42d96b;
 
+  --ion-color-tertiary: #0d72ea;
+  --ion-color-tertiary-rgb: 13, 114, 234;
+  --ion-color-tertiary-contrast: #ffffff;
+  --ion-color-tertiary-contrast-rgb: 255, 255, 255;
+  --ion-color-tertiary-shade: #0b64d0;
+  --ion-color-tertiary-tint: #1b7ad0;
+
+
   --ion-background-color: black !important;
   --ion-card-background: #121212 !important;
   --ion-item-background: #121212 !important;
   --ion-toolbar-background: #121212 !important;
 }
+.background{
+  background: var(--ion-card-background);
+}
 
 .artist-name {
-  white-space: nowrap;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Limita a 2 líneas */
+  -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 200px; /* Ajusta este valor según tus necesidades */
-  display: inline-block;
 }
 
 .click-scale {
@@ -81,4 +92,24 @@
 .scrollable-list {
   height: 100% !important; /* Ajusta esto según tus necesidades */
   overflow-y: auto !important;
+}
+.banner-image {
+  background-attachment: scroll;
+  background-position: 50% 15%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+
+
+.ion-toolbar-background-transparent {
+  --background: rgba(0, 0, 0, 0);
+}
+
+.ion-toolbar-background-glass {
+  --background: red;
+}
+
+ion-list, ion-item::part(native) {
+  background: rgba(0, 0, 0, 0);
 }

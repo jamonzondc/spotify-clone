@@ -1,23 +1,22 @@
-import { Component, ViewChild, inject } from '@angular/core';
+import {Component, ElementRef, HostListener, inject, ViewChild} from '@angular/core';
 import {
-  IonToolbar,
-  IonButtons,
-  IonTitle,
-  IonHeader,
-  IonButton,
-  IonIcon,
-  IonList,
-  IonItem,
-  IonSelect,
-  IonSelectOption,
   IonAvatar,
+  IonButton,
+  IonButtons,
+  IonContent,
+  IonHeader,
+  IonIcon,
+  IonItem,
   IonItemDivider,
   IonLabel,
+  IonList,
   IonPopover,
-  IonContent,
-  NavController,
+  IonSelect,
+  IonSelectOption,
+  IonTitle,
+  IonToolbar,
 } from '@ionic/angular/standalone';
-import { addIcons } from 'ionicons';
+import {addIcons} from 'ionicons';
 import {
   arrowDownCircleOutline,
   chevronBackCircle,
@@ -25,7 +24,7 @@ import {
   notificationsOutline,
   openOutline,
 } from 'ionicons/icons';
-import { Navigation } from 'src/app/shared';
+import {Navigation} from 'src/app/shared';
 
 @Component({
   selector: 'spotify-header',
@@ -51,9 +50,10 @@ import { Navigation } from 'src/app/shared';
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
+  @ViewChild('popover') popover!: IonPopover;
   private navigation: Navigation = inject(Navigation);
 
-  constructor() {
+  constructor(private el: ElementRef) {
     addIcons({
       chevronBackCircle,
       chevronForwardCircle,
@@ -63,15 +63,7 @@ export class HeaderComponent {
     });
   }
 
-  @ViewChild('popover') popover!: IonPopover;
 
-  openPopover(event: Event) {}
-
-  selectOption(option: string) {
-    // Haz algo con la opción seleccionada
-    console.log(option);
-    this.popover.dismiss();
-  }
 
   public back() {
     this.navigation.navigateBack();

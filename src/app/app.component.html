@@ -8,7 +8,10 @@
         [size]="(playlistShowed$ | async) ? '8' : '10'"
         class="ion-no-margin ion-no-padding full-height"
       >
-        <ion-card class="full-height">
+        <ion-card
+          class="full-height banner-image"
+          [style.background-image]="backgroundColor"
+        >
           <ion-card-header class="ion-no-padding">
             <spotify-header></spotify-header>
           </ion-card-header>
@@ -17,7 +20,7 @@
           </ion-card-content>
         </ion-card>
       </ion-col>
-      @if(playlistShowed$ | async){
+      @if (playlistShowed$ | async) {
       <ion-col size="2" class="ion-no-margin ion-no-padding full-height">
         <ion-card class="full-height">
           <spotify-play-list />
@@ -27,9 +30,8 @@
     </ion-row>
     <ion-row class="row-2">
       <ion-col>
-        <div>
-          <spotify-footer></spotify-footer>
-        </div>
+        <spotify-footer class="ion-hide-lg-down"></spotify-footer>
+        <spotify-footer-md class="ion-hide-lg-up"></spotify-footer-md>
       </ion-col>
     </ion-row>
   </ion-grid>

@@ -1,5 +1,5 @@
-import { AsyncPipe, NgFor, NgIf } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
+import {AsyncPipe, NgFor, NgIf} from '@angular/common';
+import {Component, inject, OnInit} from '@angular/core';
 import {
   IonAvatar,
   IonButton,
@@ -14,18 +14,19 @@ import {
   IonTitle,
   IonToolbar,
 } from '@ionic/angular/standalone';
-import { Store } from '@ngrx/store';
-import { addIcons } from 'ionicons';
-import { close, ellipsisHorizontal, play } from 'ionicons/icons';
-import { Observable, map, withLatestFrom } from 'rxjs';
-import { Track } from 'src/app/shared/entities/track.type';
+import {Store} from '@ngrx/store';
+import {addIcons} from 'ionicons';
+import {close, ellipsisHorizontal, play} from 'ionicons/icons';
+import {map, Observable, withLatestFrom} from 'rxjs';
+import {Track} from 'src/app/shared/entities/track.type';
 import {
-  SpotifyState,
   currentTrackIndexSelector,
   currentTrackSelector,
   queueSelector,
+  SpotifyState,
   switchQueueVisibility,
 } from '../..';
+import {ImagePipe} from "../../../shared/pipe/image/image.pipe";
 
 @Component({
   selector: 'spotify-play-list',
@@ -48,6 +49,7 @@ import {
     AsyncPipe,
     NgFor,
     NgIf,
+    ImagePipe,
   ],
 })
 export class playlistComponent implements OnInit {
@@ -55,7 +57,7 @@ export class playlistComponent implements OnInit {
     Store<{ spotify: SpotifyState }>
   );
 
-  public currentTrack$: Observable<Track | null> =
+  public currentTrack$: Observable<Track | undefined> =
     this.store.select(currentTrackSelector);
 
   public queue$: Observable<Track[]> = this.store.select(queueSelector);
@@ -68,14 +70,16 @@ export class playlistComponent implements OnInit {
   );
 
   constructor() {
-    addIcons({ close, ellipsisHorizontal, play });
+    addIcons({close, ellipsisHorizontal, play});
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   onCloseplaylist(): void {
     this.store.dispatch(switchQueueVisibility());
   }
 
-  onPlayTrack(): void {}
+  onPlayTrack(): void {
+  }
 }

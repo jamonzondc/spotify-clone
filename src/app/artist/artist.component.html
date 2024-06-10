@@ -1,1 +1,8 @@
-{{ artistId }}
+<ng-container *ngIf="artist$ | async as artist">
+  <ion-grid class="ion-no-margin ion-no-padding scrollable-list">
+    <app-artist-banner [artistInfo]="artist?.info"/>
+    <app-artist-actions [artistId]="artist.info?.id" (playArtist)="playArtist(artist?.info?.id)"/>
+   <app-artist-top-tracks [topTracks]="artist.topTracks"/>
+    <app-artist-albums [artistAlbums]="artist.artistAlbums"/>
+  </ion-grid>
+</ng-container>

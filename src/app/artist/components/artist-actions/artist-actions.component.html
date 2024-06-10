@@ -1,0 +1,92 @@
+<ion-row
+  class="actions ion-margin ion-justify-content-between ion-align-items-center"
+>
+  <ion-col class="ion-padding" size="auto">
+    <ion-grid>
+      <ion-row class="ion-align-items-center">
+        <ion-col size="auto" class="ion-padding">
+          <ion-button
+            class="play-button"
+            shape="round"
+            size="large"
+            color="secondary"
+            (click)="playArtist.emit()"
+          >
+            <ion-icon slot="icon-only" name="play"></ion-icon>
+          </ion-button>
+        </ion-col>
+        <ion-col size="auto" class="ion-padding">
+          <ion-button shape="round" fill="outline" (click)="following = !following">
+            {{ following ? 'Siguiendo' : 'Seguir' }}
+          </ion-button>
+        </ion-col>
+        <ion-col size="auto">
+          <ion-button shape="round" fill="clear" size="large" id="context-menu-trigger2">
+            <ion-icon
+              slot="icon-only"
+              name="ellipsis-horizontal"
+            ></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-col>
+</ion-row>
+
+
+<ion-popover
+  trigger="context-menu-trigger2"
+  triggerAction="click"
+  side="bottom"
+  alignment="end"
+  size="auto"
+>
+  <ng-template>
+    <ion-content class="ion-no-padding">
+      <ion-list>
+        <ion-item button (click)="following = !following">
+          <ion-icon slot="start" [color]="following? 'secondary':''"
+                    [name]="following? 'close-outline':'person-add-outline'"></ion-icon>
+          {{ following ? 'Dejar de seguir' : 'Seguir' }}
+        </ion-item>
+        <ion-item button disabled="true">
+          <ion-icon name="radio-outline" slot="start"></ion-icon>
+          Ir a radio del artista
+        </ion-item>
+
+        <ion-item button [href]="report" target="_blank">
+          <ion-icon name="warning-outline" slot="start"></ion-icon>
+          Denunciar
+          <ion-icon name="open-outline" slot="end"></ion-icon>
+        </ion-item>
+
+        <ion-item button id="nested-trigger">
+          <ion-icon name="share-outline" slot="start"></ion-icon>
+          Compartir
+          <ion-icon name="caret-forward-outline" slot="end"></ion-icon>
+        </ion-item>
+        <ion-popover trigger="nested-trigger" triggerAction="hover" [dismissOnSelect]="true" side="end" size="auto">
+          <ng-template>
+            <ion-content>
+              <ion-list>
+                <ion-item button=true (click)="copyPath()">
+                  <ion-icon name="copy-outline" slot="start"></ion-icon>
+                  Copiar enlace al artista
+                </ion-item>
+                <ion-item button=true disabled="true">
+                  <ion-icon name="code-outline" slot="start"></ion-icon>
+                  Insertar artista
+                </ion-item>
+              </ion-list>
+            </ion-content>
+          </ng-template>
+        </ion-popover>
+
+        <ion-item button lines="full" (click)="openSpotifyApp()">
+          <ion-icon name="open-outline" slot="start"></ion-icon>
+          Abrir en la aplicación del ordenador
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ng-template>
+</ion-popover>

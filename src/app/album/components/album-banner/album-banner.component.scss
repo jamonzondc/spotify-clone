@@ -1,0 +1,17 @@
+.banner {
+  background: linear-gradient(180deg, #43b1c0, transparent);
+}
+
+.album-title {
+  color: white;
+  font-size: 4em;
+
+  white-space: nowrap;
+  font-weight: 900;
+}
+
+.album-img::part(image) {
+  width: 214px;
+  height: auto;
+  border-radius: 4px;
+}

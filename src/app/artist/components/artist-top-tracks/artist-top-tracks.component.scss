@@ -1,0 +1,121 @@
+.sticky-header {
+  position: sticky;
+  top: 0; /* Adjust this value to match the height of your ion-header */
+  z-index: 1000; /* Ensure the header appears above other content */
+}
+
+.album-title {
+  color: white;
+  font-size: 4em;
+
+  white-space: nowrap;
+  font-weight: 900;
+}
+
+.album-img::part(image) {
+  width: 214px;
+  height: auto;
+  border-radius: 4px;
+}
+
+on-list-header {
+  color: gray;
+}
+
+ion-list-header ion-icon {
+  font-size: 24px;
+  margin-right: 44px;
+}
+
+.animate-bars {
+  max-width: 20px;
+  opacity: 1;
+  .number {
+    opacity: 0;
+  }
+}
+
+.avatar,
+.animate-bars {
+  position: relative;
+}
+
+.hide {
+  opacity: 0;
+}
+
+.play-icon {
+  font-size: 28px;
+  position: absolute;
+  top: 50%;
+  left: calc(50% + 8px);
+  transform: translate(-50%, -50%);
+  transition: opacity 0.3s ease;
+}
+
+.add-icon,
+.ellipsis-icon {
+  opacity: 0;
+}
+
+.track-item:hover .add-icon,
+.track-item:hover .ellipsis-icon {
+  opacity: 1;
+}
+
+.track-info {
+  margin-left: 24px;
+}
+
+.number {
+  font-weight: bold;
+  font-size: 16px;
+  color: gray;
+}
+
+.only-play-icon-on-hover {
+  .track-item .number,
+  .track-item .pause-icon,
+  .track-item .animate-bars {
+    opacity: 0;
+    z-index: 0;
+  }
+
+  .track-item .play-icon {
+    opacity: 1;
+    z-index: 100;
+  }
+}
+
+.only-pause-icon-on-hover {
+  .track-item .number,
+  .track-item .animate-bars,
+  .track-item .play-icon {
+    opacity: 0;
+  }
+
+  .track-item .pause-icon {
+    opacity: 1;
+  }
+}
+
+.animate-bars-on-playing {
+  .animate-bars {
+    opacity: 1;
+  }
+
+  .number,
+  .play-icon {
+    opacity: 0;
+  }
+}
+.number-on-not-playing {
+  .number {
+    opacity: 1;
+  }
+
+  .animate-bars,
+  .play-icon {
+    opacity: 0;
+  }
+}

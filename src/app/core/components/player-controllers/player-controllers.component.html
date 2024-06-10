@@ -31,7 +31,7 @@
         fill="clear"
         shape="round"
         class="click-scale"
-        (click)="onPlayOrPause(!playing)"
+        (click)="onPlayOrPause()"
       >
         <ion-icon
           class="play-pause"
@@ -64,11 +64,11 @@
   </ion-row>
   <ion-row>
     <ion-col>
-      <!--  <div>
-        <ion-label>{{ dataTimer.currentTime }}</ion-label>
+      <div>
+        <ion-label>{{ dataTimer.currentTime | date : "mm:ss" }}</ion-label>
         <ion-progress-bar [value]="dataTimer.progress"></ion-progress-bar>
-        <ion-label>{{ dataTimer.remainingTime }}</ion-label>
-      </div> -->
+        <ion-label>{{ dataTimer.remainingTime | date : "mm:ss" }}</ion-label>
+      </div>
     </ion-col>
   </ion-row>
 </ion-grid>

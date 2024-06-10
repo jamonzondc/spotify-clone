@@ -1,0 +1,39 @@
+<ion-row
+  class="actions ion-margin ion-justify-content-between ion-align-items-center"
+>
+  <ion-col class="ion-padding" size="auto">
+    <ion-grid>
+      <ion-row class="ion-align-items-center">
+        <ion-col size="auto">
+          <ion-button
+            shape="round"
+            size="large"
+            color="secondary"
+            (click)="playAlbum.emit()"
+          >
+            <ion-icon slot="icon-only" name="play"></ion-icon>
+          </ion-button>
+        </ion-col>
+        <ion-col size="auto">
+          <ion-button shape="round" fill="clear" size="large">
+            <ion-icon slot="icon-only" name="add-circle-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+        <ion-col size="auto">
+          <ion-button shape="round" fill="clear" size="large">
+            <ion-icon
+              slot="icon-only"
+              name="ellipsis-horizontal"
+            ></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-col>
+  <ion-col class="ion-padding" size="auto">
+    <ion-button fill="clear" size="small">
+      <span class="list-text"> Lista </span>
+      <ion-icon slot="end" name="list-outline"></ion-icon>
+    </ion-button>
+  </ion-col>
+</ion-row>

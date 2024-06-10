@@ -1,9 +1,9 @@
-import { AsyncPipe } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { Track } from 'src/app/shared/entities/track.type';
-import { SpotifyState, currentTrackSelector } from '../../../shared/store';
+import {AsyncPipe} from '@angular/common';
+import {Component, inject, OnInit} from '@angular/core';
+import {Store} from '@ngrx/store';
+import {Observable} from 'rxjs';
+import {Track} from 'src/app/shared/entities/track.type';
+import {currentTrackSelector, SpotifyState} from '../../store';
 
 @Component({
   selector: 'spotify-player-info',
@@ -17,9 +17,11 @@ export class PlayerInfoComponent implements OnInit {
     Store<{ spotify: SpotifyState }>
   );
 
-  track$: Observable<Track | null> = this.store.select(currentTrackSelector);
+  track$: Observable<Track | undefined> = this.store.select(currentTrackSelector);
 
-  constructor() {}
+  constructor() {
+  }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 }

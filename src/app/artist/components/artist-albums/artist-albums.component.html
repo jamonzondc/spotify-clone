@@ -1,0 +1,11 @@
+<ion-row class="background">
+  @for (album of artistAlbums; track $index) {
+    <ion-col>
+      <spotify-card-info
+        [data]="album"
+        (play)="playAlbum(album)"
+        (view)="viewAlbum(album)"
+      />
+    </ion-col>
+  }
+</ion-row>

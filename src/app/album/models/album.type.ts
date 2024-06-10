@@ -1,10 +1,8 @@
 import { Track } from 'src/app/shared';
 
-export type AlbumViewData = {
+export type AlbumViewModel = {
   id: string;
-  type: string;
   name: string;
-  description: string;
   artists: string;
   image: string;
   info: string;

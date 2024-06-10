@@ -1,0 +1,25 @@
+<ion-row
+  class="ion-no-margin ion-justify-content-start banner-image"
+>
+  <ion-col class="ion-no-margin ion-padding" size="12">
+    <ion-grid class="header">
+      <ion-row
+        class="ion-align-items-end ion-justify-content-start"
+        style="flex-wrap: nowrap"
+      >
+        <ion-col size="auto" class="ion-padding">
+          <ion-label>
+            <span>
+            <ion-icon name="checkmark-circle" color="tertiary"></ion-icon>
+              Artista verificado
+            </span>
+            <h1 class="artist-title">
+              {{ artistInfo?.name }}
+            </h1>
+            <h3>{{ artistInfo?.followersCount + ' ' }} oyentes mensuales</h3>
+          </ion-label>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-col>
+</ion-row>

@@ -1,21 +1,17 @@
-import { Injectable, inject } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
-import { AlbumApi } from 'src/app/album/services/api/album.api';
-import { BasicResponse } from 'src/app/shared/api/models/basic-response.model';
-import { Album } from 'src/app/shared/entities';
-import { Track } from 'src/app/shared/entities/track.type';
-import {
-  SpotifyState,
-  queue,
-  changeCurrentTrackIndex,
-} from '../../shared/store';
-import { albumViewDataAdapter } from '../adapters/album.adapter';
-import { AlbumViewData } from '../models/album.type';
+import {inject, Injectable} from '@angular/core';
+import {Store} from '@ngrx/store';
+import {Observable} from 'rxjs';
+import {map, tap} from 'rxjs/operators';
+import {AlbumApi} from 'src/app/album/api/album.api';
+import {BasicResponse} from 'src/app/shared/api/models/basic-response.model';
+import {Album, Image} from 'src/app/shared/entities';
+import {Track} from 'src/app/shared/entities/track.type';
+import {changeCurrentTrackIndex, queue, SpotifyState,} from '../../core/store';
+import {Notification} from "../../core/services/notification/notification";
 
 @Injectable()
 export class AlbumUseCaseService {
+  private readonly notification: Notification = inject(Notification);
   private readonly albumApi: AlbumApi = inject(AlbumApi);
   private readonly store: Store<{ spotify: SpotifyState }> = inject(
     Store<{ spotify: SpotifyState }>
@@ -23,71 +19,53 @@ export class AlbumUseCaseService {
 
   public playTrackInAlbum(
     albumId: string,
-    image: string,
+    images: Image[],
     currentTrackIndex: number
   ): Observable<BasicResponse<Album>> {
     return this.albumApi.getAlbum(albumId).pipe(
       tap((response: BasicResponse<Album>) => {
         if (response.hasError()) {
-          //Emitir un error
-          return;
-        }
-
-        if (response.getData()?.tracks.length === 0) {
-          //Emitir un error
+          this.notification.showNotification(response.getError()?.getCode());
           return;
         }
 
         this.store.dispatch(
           queue({
             queue: this.addImageToTrack(
-              image,
+              images,
               response.getData()?.tracks || []
             ),
           })
         );
-        this.store.dispatch(changeCurrentTrackIndex({ currentTrackIndex }));
+
+        this.store.dispatch(
+          changeCurrentTrackIndex({currentTrackIndex: currentTrackIndex})
+        );
       })
     );
   }
 
   public playAlbum(
     albumId: string,
-    image: string
+    images: Image[]
   ): Observable<BasicResponse<Album>> {
-    return this.playTrackInAlbum(albumId, image, 0);
+    return this.playTrackInAlbum(albumId, images, 0);
   }
 
-  public getAlbum(albumId: string): Observable<AlbumViewData | null> {
+  public getAlbum(albumId: string): Observable<Album | undefined> {
     return this.albumApi.getAlbum(albumId).pipe(
-      map((response: BasicResponse<Album>): AlbumViewData | null => {
+      map((response: BasicResponse<Album>): Album | undefined => {
         if (response.hasError()) {
-          //Emitir un error
-          return null;
+          this.notification.showNotification(response.getError()?.getCode());
+          return undefined;
         }
-        return albumViewDataAdapter(response.getData());
+        return response.getData();
       })
     );
   }
 
-  private addImageToTrack(image: string, tracks: Track[] | null): Track[] {
+  private addImageToTrack(images: Image[], tracks: Track[] | undefined): Track[] {
     if (!tracks) return [];
-    return tracks.map((track) => ({ ...track, image }));
+    return tracks.map((track: Track) => ({...track, images}));
   }
-
-  /* private setCurrentTrack(): void {
-    this.store
-      .select(currentTrackIndexSelector)
-      .pipe(
-        withLatestFrom(this.store.select(currentplaylistSelector)),
-        tap(([currentTrackIndex, playlist]) => {
-          if (currentTrackIndex < 0 || currentTrackIndex >= playlist.length)
-            return;
-
-          const track: Track = playlist[currentTrackIndex];
-          this.store.dispatch(currentTrack({ currentTrack: track }));
-        })
-      )
-      .subscribe();
-  } */
 }

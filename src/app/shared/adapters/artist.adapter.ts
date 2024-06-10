@@ -1,6 +1,6 @@
 import { Artist } from '../entities/artist.type';
 
-export function getArtistsAdapter(artists: Artist[]): string {
+export function getArtistViewModelAdapter(artists: Artist[]): string {
   if (!artists || artists.length === 0) return '?';
 
   return artists.reduce(

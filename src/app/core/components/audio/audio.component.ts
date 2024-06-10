@@ -6,7 +6,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./audio.component.scss'],
 })
 export class AudioComponent implements OnInit {
-  private audio: HTMLAudioElement | null = new Audio();
+  private audio: HTMLAudioElement | undefined = new Audio();
   private volume: number = 0;
 
   @Input()

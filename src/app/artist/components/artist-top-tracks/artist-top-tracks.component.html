@@ -1,0 +1,65 @@
+<ion-row class="ion-no-margin">
+  <ion-col class="ion-no-padding">
+    <ion-list>
+      <ion-item class="sticky-header background">
+        <span class="avatar">
+          <span class="number">#</span>
+        </span>
+        <ion-label class="track-info">
+          <h2>Titulo</h2>
+        </ion-label>
+        <ion-icon name="time-outline"></ion-icon>
+        <ion-icon name="ellipsis-horizontal" slot="end" class="hide"></ion-icon>
+      </ion-item>
+
+      <ion-item
+        button
+        class="track-item"
+        *ngFor="let track of topTracks; let index = index"
+        (click)="topTracks[index].isPlaying = !topTracks[index].isPlaying"
+        (mouseover)="whenMouseHover(track)"
+      >
+        <span
+          class="avatar"
+          [ngClass]="
+            track.isPlaying
+              ? 'animate-bars-on-playing'
+              : 'number-on-not-playing'
+          "
+          (click)="playTopTrack(track)"
+        >
+          <span class="number">
+            {{ index + 1 }}
+          </span>
+          <ion-icon
+            [name]="track?.isPlaying ? 'play' : 'paue'"
+            class="play-icon"
+          ></ion-icon>
+          <ion-img
+            class="animate-bars"
+            src="assets/images/animate-bars.gif"
+          ></ion-img>
+        </span>
+
+        <ion-label class="track-info">
+          <h2>{{ track.name }}</h2>
+          <app-artist-info [artists]="track.artists" />
+        </ion-label>
+        <ion-icon
+          class="add-icon"
+          name="add-circle-outline"
+          slot="end"
+        ></ion-icon>
+        <ion-label slot="end">
+          <p>{{ track?.duration | date : "m:ss" }}</p>
+        </ion-label>
+        <ion-icon
+          name="ellipsis-horizontal"
+          slot="end"
+          class="ellipsis-icon"
+          (click)="openTools($event)"
+        ></ion-icon>
+      </ion-item>
+    </ion-list>
+  </ion-col>
+</ion-row>
